@@ -282,4 +282,7 @@ php artisan migrate
 
 ## Screenshots
 
-(See images above for dashboard and middleware behavior)
+<img width="1829" height="972" alt="image" src="https://github.com/user-attachments/assets/27c9e67f-c8fc-456d-b0dd-54e08a2a1b37" />
+<img width="1713" height="810" alt="image" src="https://github.com/user-attachments/assets/6fc842f3-6089-4e0a-b116-87a9acd099a2" />
+<img width="1731" height="737" alt="image" src="https://github.com/user-attachments/assets/fa6593c5-25ff-456f-832b-c34fd657e546" /> 
+<img width="1746" height="724" alt="image" src="https://github.com/user-attachments/assets/90fac283-7317-4885-bda2-9111fae33829" />
