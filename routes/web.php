@@ -38,7 +38,6 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/profile', [DashboardController::class, 'profile'])
         ->name('profile');
-
 });
 
 /*
@@ -65,7 +64,9 @@ Route::prefix('admin')
             return view('admin.settings');
         })->name('settings');
 
-});
+        Route::get('/logs', [AdminController::class, 'logs'])
+            ->name('logs');
+    });
 
 /*
 |--------------------------------------------------------------------------
@@ -80,8 +81,7 @@ Route::prefix('moderator')
         Route::get('/panel', function () {
             return view('moderator.panel');
         })->name('moderator.panel');
-
-});
+    });
 
 /*
 |--------------------------------------------------------------------------
@@ -95,5 +95,4 @@ Route::middleware(['auth', 'role:admin,moderator'])
         Route::get('/management', function () {
             return view('management.dashboard');
         })->name('management.dashboard');
-
     });

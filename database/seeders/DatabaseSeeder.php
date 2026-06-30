@@ -3,37 +3,22 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\User;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        User::truncate();
 
-        User::create([
-            'name' => 'Admin',
-            'email' => 'admin@example.com',
-            'password' => Hash::make('password'),
-            'role' => 'admin',
-            'last_activity_at' => now(),
+        DB::statement('SET FOREIGN_KEY_CHECKS=0');
+
+
+        $this->call([
+            UsersTableSeeder::class,
         ]);
 
-        User::create([
-            'name' => 'Moderator',
-            'email' => 'moderator@example.com',
-            'password' => Hash::make('password'),
-            'role' => 'moderator',
-            'last_activity_at' => now(),
-        ]);
 
-        User::create([
-            'name' => 'User',
-            'email' => 'user@example.com',
-            'password' => Hash::make('password'),
-            'role' => 'user',
-            'last_activity_at' => now(),
-        ]);
+        DB::statement('SET FOREIGN_KEY_CHECKS=1');
+
     }
 }
