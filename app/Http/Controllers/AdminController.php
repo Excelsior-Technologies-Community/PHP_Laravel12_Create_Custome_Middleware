@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\MiddlewareLog;
+use App\Models\UnauthorizedLog;
 
 class AdminController extends Controller
 {
@@ -33,7 +35,7 @@ class AdminController extends Controller
         }
 
         // ---------------- SORT (IMPORTANT FIX) ----------------
-        // 👉 for your requirement (1,2,3 pagination correct order)
+        // for your requirement (1,2,3 pagination correct order)
         $query->orderBy('id', 'asc');
 
         // ---------------- PAGINATION ----------------
@@ -123,5 +125,22 @@ class AdminController extends Controller
             'monthlyInactive',
             'latestUsers'
         ));
+    }
+
+    public function logs(Request $request)
+    {
+
+        $middlewareLogs = MiddlewareLog::with('user')
+            ->latest()
+            ->paginate(10);
+
+
+        $unauthorizedLogs = UnauthorizedLog::with('user')
+            ->latest()
+            ->paginate(10);
+
+
+
+        return view('admin.logs', compact('middlewareLogs', 'unauthorizedLogs'));
     }
 }

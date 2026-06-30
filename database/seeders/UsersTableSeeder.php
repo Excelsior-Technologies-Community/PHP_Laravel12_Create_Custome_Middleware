@@ -5,11 +5,16 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 
 class UsersTableSeeder extends Seeder
 {
     public function run(): void
     {
+
+        User::truncate();
+
+
         User::create([
             'name' => 'Admin User',
             'email' => 'admin@example.com',
@@ -17,7 +22,8 @@ class UsersTableSeeder extends Seeder
             'role' => 'admin',
             'last_activity_at' => now()
         ]);
-        
+
+
         User::create([
             'name' => 'Moderator User',
             'email' => 'moderator@example.com',
@@ -25,7 +31,8 @@ class UsersTableSeeder extends Seeder
             'role' => 'moderator',
             'last_activity_at' => now()->subHours(2)
         ]);
-        
+
+
         User::create([
             'name' => 'Regular User',
             'email' => 'user@example.com',
@@ -33,7 +40,8 @@ class UsersTableSeeder extends Seeder
             'role' => 'user',
             'last_activity_at' => now()->subDays(1)
         ]);
-        
+
+
         User::create([
             'name' => 'Inactive User',
             'email' => 'inactive@example.com',
@@ -41,5 +49,6 @@ class UsersTableSeeder extends Seeder
             'role' => 'user',
             'last_activity_at' => now()->subDays(40)
         ]);
+
     }
 }

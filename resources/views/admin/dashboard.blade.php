@@ -11,8 +11,24 @@
             <small class="text-muted">User management & analytics overview</small>
         </div>
         <div>
-            <a href="{{ route('admin.statistics') }}" class="btn btn-dark btn-sm">Statistics</a>
-            <a href="{{ route('dashboard') }}" class="btn btn-outline-secondary btn-sm">User Panel</a>
+
+            <a href="{{ route('admin.logs') }}"
+                class="btn btn-dark btn-sm">
+                Middleware Logs
+            </a>
+
+
+            <a href="{{ route('admin.statistics') }}"
+                class="btn btn-dark btn-sm">
+                Statistics
+            </a>
+
+
+            <a href="{{ route('dashboard') }}"
+                class="btn btn-outline-secondary btn-sm">
+                User Panel
+            </a>
+
         </div>
     </div>
 
@@ -116,41 +132,41 @@
 
                         @forelse($users as $user)
 
-                            <tr>
-                                <td>#{{ $user->id }}</td>
+                        <tr>
+                            <td>#{{ $user->id }}</td>
 
-                                <td class="fw-semibold">{{ $user->name }}</td>
+                            <td class="fw-semibold">{{ $user->name }}</td>
 
-                                <td>{{ $user->email }}</td>
+                            <td>{{ $user->email }}</td>
 
-                                <td>
-                                    <span class="badge bg-{{ $user->role === 'admin' ? 'danger' : ($user->role === 'moderator' ? 'warning' : 'primary') }}">
-                                        {{ ucfirst($user->role) }}
-                                    </span>
-                                </td>
+                            <td>
+                                <span class="badge bg-{{ $user->role === 'admin' ? 'danger' : ($user->role === 'moderator' ? 'warning' : 'primary') }}">
+                                    {{ ucfirst($user->role) }}
+                                </span>
+                            </td>
 
-                                <td>
-                                    {{ $user->last_activity_at ? $user->last_activity_at->diffForHumans() : 'Never' }}
-                                </td>
+                            <td>
+                                {{ $user->last_activity_at ? $user->last_activity_at->diffForHumans() : 'Never' }}
+                            </td>
 
-                                <td>
-                                    @if($user->last_activity_at && $user->last_activity_at->diffInMinutes(now()) < 5)
-                                        <span class="badge bg-success">Online</span>
+                            <td>
+                                @if($user->last_activity_at && $user->last_activity_at->diffInMinutes(now()) < 5)
+                                    <span class="badge bg-success">Online</span>
                                     @elseif($user->last_activity_at && $user->last_activity_at->diffInHours(now()) < 24)
                                         <span class="badge bg-warning text-dark">Active</span>
-                                    @else
+                                        @else
                                         <span class="badge bg-secondary">Inactive</span>
-                                    @endif
-                                </td>
-                            </tr>
+                                        @endif
+                            </td>
+                        </tr>
 
                         @empty
 
-                            <tr>
-                                <td colspan="6" class="text-center py-4 text-muted">
-                                    No users found
-                                </td>
-                            </tr>
+                        <tr>
+                            <td colspan="6" class="text-center py-4 text-muted">
+                                No users found
+                            </td>
+                        </tr>
 
                         @endforelse
 
