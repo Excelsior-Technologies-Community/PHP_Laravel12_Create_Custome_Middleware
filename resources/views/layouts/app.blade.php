@@ -10,22 +10,27 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
         <div class="container">
-            <a class="navbar-brand" href="/">Middleware Demo</a>
+            <a class="navbar-brand fw-bold" href="/">
+                <i class="fa-solid fa-shield-cat text-primary me-2"></i>Middleware Project
+            </a>
             @auth
-                <span class="navbar-text text-white mx-3">
-                    Last active:
-                    {{ auth()->user()->last_activity_at ? auth()->user()->last_activity_at->diffForHumans() : 'Never' }}
+                <span class="navbar-text text-white mx-2 small opacity-75">
+                    Role: <span class="badge bg-warning text-dark">{{ ucfirst(auth()->user()->role) }}</span> | 
+                    Last active: {{ auth()->user()->last_activity_at ? auth()->user()->last_activity_at->diffForHumans() : 'Never' }}
                 </span>
             @endauth
-            <div class="navbar-nav">
+            <div class="navbar-nav ms-auto gap-2">
+                <a class="nav-link fw-semibold text-warning" href="{{ route('sandbox.index') }}">
+                    <i class="fa-solid fa-vial me-1"></i> Middleware Sandbox
+                </a>
                 @auth
                     <a class="nav-link" href="{{ route('dashboard') }}">Dashboard</a>
                     @if(auth()->user()->role === 'admin')
                         <a class="nav-link" href="{{ route('admin.dashboard') }}">Admin Panel</a>
                     @endif
-                    <form method="POST" action="{{ route('logout') }}">
+                    <form method="POST" action="{{ route('logout') }}" class="d-inline">
                         @csrf
                         <button type="submit" class="btn btn-link nav-link">Logout</button>
                     </form>
@@ -47,8 +52,8 @@
 
         @yield('content')
     </div>
-    <!-- Add this in the head section or before the chart script -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    @stack('scripts')
 </body>
 
 </html>
