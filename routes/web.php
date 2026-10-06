@@ -4,16 +4,23 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\MiddlewareSandboxController;
 
 /*
 |--------------------------------------------------------------------------
-| Public Routes
+| Public Routes & Middleware Sandbox
 |--------------------------------------------------------------------------
 */
 
 Route::get('/', function () {
     return view('welcome');
 });
+
+// Middleware Test Sandbox & Security Simulator Routes
+Route::get('/sandbox', [MiddlewareSandboxController::class, 'index'])->name('sandbox.index');
+Route::get('/sandbox/simulate', [MiddlewareSandboxController::class, 'simulate'])->name('sandbox.simulate');
+Route::post('/sandbox/impersonate/{id}', [MiddlewareSandboxController::class, 'impersonate'])->name('sandbox.impersonate');
+Route::get('/sandbox/export', [MiddlewareSandboxController::class, 'exportLogs'])->name('sandbox.export');
 
 /*
 |--------------------------------------------------------------------------
